@@ -1,5 +1,14 @@
-* Reproducing tables
-** Key ideas
+#+BLOG: myblog
+#+POSTID: 282
+#+ORG2BLOG:
+#+DATE: [2020-07-02 Thu 13:34]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY: 
+#+TAGS: Science, LaTeX
+#+DESCRIPTION:
+#+TITLE: Making tables reproducible
+
+* Key ideas
 
 + DON'T manually transfer table values to LaTeX -- DO put the data in a
   separate file that gets loaded during compilation.
@@ -7,8 +16,10 @@
   use a script to truncate values consistently.
 + DON'T manually insert units or convert exponents -- DO use ~siunitx~
   to format numbers and units.
++ DON'T end up with a jumble of scripts -- DO tie your workflow
+  together with a Makefile
 
-** Introduction
+* Introduction
 
 Developing reproducible research is a key element in producing robust
 results and good science.
@@ -40,7 +51,7 @@ like R and Python. I also recommend that you make use of GNU Make to
 tie everything together and make it easy to remember what to do when
 you come back in 6 months time. 
 
-** Background
+* Background
 
 I don't want to provide a detailed literature review here but I do
 want to make a note of some important trends in science. 
@@ -65,7 +76,7 @@ want to make a note of some important trends in science.
 The key message is that reproducibility is of fundamental importance
 and that we all need to work harder at enabling it for our own research.
 
-** Automating the process starting with table loading
+* Automating the process starting with table loading
 
 #+CAPTION: Example results file to be converted into a table
 [[./img/example-table.png]]
@@ -108,7 +119,7 @@ but for specialist needs (such as, truncating numbers) you may need to
 write your own script that writes a `tex' file. This tex file will
 then need to be included into your main file with ~\input~.
 
-*** Truncating numbers appropriately
+** Truncating numbers appropriately
 
 Quoting table values to 10 decimal places is clearly not
 appropriate. Most experiments, if tried again, will yield slightly
@@ -164,7 +175,7 @@ figure. This might be improved by first finding out if the first two
 digits of the s.d. are between 11 and 19 inclusive and in that case
 formatting with 2 significant digits.
 
-** Makefiles to tie together and document
+* Makefiles to tie together and document
 
 I always find that when I come back to a project after leaving it for
 a few weeks that I cannot remember what I've done. Some vague
@@ -187,7 +198,7 @@ try. However, it is usually not such a burden to use hypens or underscores.
 An excellent tutorial on using Make for reproducible research is
 provided by [[https://the-turing-way.netlify.app/reproducible-research/make][Arnold et al.]]
 
-** Conclusions and next steps
+* Conclusions and next steps
 
 Automating your research can seem like cycling up a steep
 hill. Progress appears slow and it's much harder work than
@@ -206,7 +217,11 @@ Gibson, Patricia Herterich, Rosie Higman, … Kirstie Whitaker. (2019,
 March 25). The Turing Way: A Handbook for Reproducible Data Science
 (Version v0.0.4). Zenodo. http://doi.org/10.5281/zenodo.3233986
 
+* Acknowledgements
+
+This blog post was produced using Emacs, org-mode, and org2blog.
 
 
 
 
+# ./img/example-table.png https://jamesbrusey.coventry.domains/wp-content/uploads/2020/07/example-table.png
