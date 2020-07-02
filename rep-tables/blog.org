@@ -10,88 +10,63 @@
 
 ** Introduction
 
-Developing replicable research is a key element in producing robust
+Developing reproducible research is a key element in producing robust
 results and good science.
 
-To achieve replicable research, we must be able to come back to our
-source files in 6, 12, 24 months (or more!) and be able to re-run any
+To achieve reproducible research, we must be able to come back to our
+source files in 6 months (or more!) and be able to re-run any
 part of the analysis, reproduce any graph, check the values in the
 tables, and generally ensure that your results were not a fluke. How
-important replicability is to you will be discipline dependent but no
-self-respecting researcher should be publishing a paper that cannot be
-replicated.
+important reproducibility is to you will be discipline dependent but no
+self-respecting researcher should be publishing a paper that has results that cannot even be
+reproduced given access to the original data.
 
-One element of replicability is to produce tables in such a way that
-manual error is avoided and that any value in the table can be
-recalculated.
+One element of reproducibility, that I want to focus on here, is to
+produce tables in such a way that manual error is avoided and that any
+value in the table can be recalculated.
 
 Manual handling of numbers is a common source of error but it needn't
 be. Once scripts are set up to automatically generate tables from the
 source data, they are easily modified to suit the next table, the next
 paper, or the next project. If you are not using a tool that supports
 you producing your tables directly, then this will be the biggest
-first difficulty. However, without this step, it will be hard, not
-just to automate your tables, but to produce replicable research /at
-all/.
+hurdle. However, without this step, it will be hard, not
+just to automate your tables, but to make your work completely reproducible.
 
-Two tools that I will discuss here for automating tables are Python
-and R. Either one or both can be used but I also recommend tying
-everything together with GNU Make so that it is easier to remember how
-to run your scripts when you come back to them later.
+Your tools will dictate, to some extent, how easy automation is to
+do. Try to avoid tools that encourage manual handling, such as Excel
+and Word, and switch instead to tools that make automation easier,
+like R and Python. I also recommend that you make use of GNU Make to
+tie everything together and make it easy to remember what to do when
+you come back in 6 months time. 
 
 ** Background
 
-+ A quick search for reproducibility in science on [[https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=reproducibility+in+science&btnG=&oq=reprod][Google Scholar]]
-  yields top hits in the biomedical domain. 
-+ It's not surprising that biomedical researchers consider
-  reproducibility more than most other researchers since they are
-  literally dealing with life or death decisions. 
-+ Nevertheless, /all/ researchers should consider reproducibility
-  important.
-+ Research that is not reproducible may not be flawed but we will
-  never really know.
-+ It might be tempting to obscure the method detail. Publishers tend
-  to encourage us to make the method section as terse as
-  possible. However, disguising the method can also cover up dishonest
-  practice.
-+ Since new research always builds on past work, flawed science can
-  hold back a domain and prevent progress.
+I don't want to provide a detailed literature review here but I do
+want to make a note of some important trends in science. 
 
-+ [[https://scfbm.biomedcentral.com/articles/10.1186/1751-0473-8-7][Git can facilitate greater reproducibility and increased
-  transparency in science]]. (This may not be so relevant?)
+1. [[https://en.wikipedia.org/wiki/Open_science][The Open science movement]] is leading the way towards more
+   transparent scientific practices. Scientists are starting to
+   realise that the intellectual honesty that goes with open source
+   software should also apply to their outputs. This means more than
+   just making the output (or journal paper) freely available -- it
+   means making the `source code' of that output available, including
+   the original data used and analysis scripts.
+2. A systematic study of biomedical research in 2005 by Ioannidis
+   found that [[https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124&xid=17259,15700019,15700186,15700190,15700248][most published research findings are false]]. It seems
+   likely that the problems identified for biomedicine are /worse/,
+   not better, for other disciplines.
+3. A 2016 survey of 1500 scientists asked if there was a
+   [[https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970][reproducibility crisis]]? More than half said `yes', with another
+   third saying that there was a slight crisis. Scientists reported
+   trouble reproducing others and many said they even had trouble
+   reproducing their own experiments, when they attempted to do so.
 
-+ [[https://en.wikipedia.org/wiki/Open_science][The Open science movement]] is leading the way towards more
-  transparent scientific practices. Research should be open for
-  inspection and critique at every level. 
+The key message is that reproducibility is of fundamental importance
+and that we all need to work harder at enabling it for our own research.
 
-+ Karl Popper -- science is about [[https://en.wikipedia.org/wiki/Falsifiability][falsifiability]]. A /correctly
-  phrased/ scientific hypothesis can be proven false with a single
-  piece of evidence. Similarly, /any/ existing knowledge can
-  potentially be overturned based on new evidence.
-+ Research papers are, by and large, about clearly communicating
-  scientific hypotheses and the associated evidence supporting those
-  hypotheses.
-+ Other researchers might try to test a hypothesis that they find in a
-  research paper by either repeating the experiment or re-analysing
-  the data. 
-+ Since many public data-sets are now available, repeating analysis is
-  both possible and worthwhile. 
-+ Indeed, it makes sense for researchers to make their data-set and
-  analysis methods available to others to allow them to check them
-  much in the same way as open-source software makes it possible for a
-  wider community to help with identifying security flaws.
-+ If a work is not able to be reproduced because there is not enough
-  information to redo the experiment then the work may still be valid
-  but its validity is questionable. 
+** Automating the process starting with table loading
 
-
-Scientific research can, at times, be dispiriting. 
-Young researchers will often find themselves comparing their Google
-Scholar profile with such greats as
-[[https://scholar.google.com/citations?user=6m4wv6gAAAAJ&hl=en&oi=ao][Richard Sutton]] a
-One is automatically 
-
-** Loading table data from a file
 #+CAPTION: Example results file to be converted into a table
 [[./img/example-table.png]]
 
@@ -123,21 +98,16 @@ Note how a few things needed to be manually transformed in this process.
 With so many little details to be taken care of, automating looks
 hard. Fortunately, there are some cool tools to help. 
 
-+ two options: use csvsimple to read in a CSV file
-+ alternatively, use ~\input~ and write a tex file that contains the
-  table rows using a script
+If the job is a simple one (or can be made simple), try using
+[[https://www.ctan.org/pkg/csvsimple][csvsimple]] to load in table. I won't describe this here but there's
+lots of help on the Internet. 
 
-*** Using csvsimple
+The ~csvsimple~ package allows you to put extra
+commands, such as ~\si{}~ (from ~siunitx~), around each table entry
+but for specialist needs (such as, truncating numbers) you may need to
+write your own script that writes a `tex' file. This tex file will
+then need to be included into your main file with ~\input~.
 
-insert minimal code here to do csvsimple with the table above.
-
-+ how to avoid embedding the figures in the source text
-+ formatting numbers so that they can be read
-+ formatting according to significant digits
-+ using a Makefile to help remember how to run your scripts
-
-*** Generating latex directly
-** Significant figures
 *** Truncating numbers appropriately
 
 Quoting table values to 10 decimal places is clearly not
@@ -152,9 +122,9 @@ precision of the mean. Confidence intervals can often be derived from
 the standard deviation given the sample size and assuming a normal
 distribution.
 
-The standard deviation should be expressed to ONE [[https://en.wikipedia.org/wiki/Significant_figures][significant figure]]
-unless the number is between 11 and 19 (times some power of ten) in
-which case you can use two significant figures.
+As a rule of thumb, the standard deviation should be expressed to
+*one* [[https://en.wikipedia.org/wiki/Significant_figures][significant figure]] unless the number is between 11 and 19 (times
+some power of ten) in which case you can use two significant figures.
 
 The measurement value should be expressed to agree in terms of decimal
 places with the standard deviation.
@@ -164,14 +134,11 @@ average and standard deviation might be 10.1298 ± 0.2595. This should
 be expressed as 10.1 ± 0.3 or 10.1 (0.3) where the number in
 parenthesis is taken to be the estimated standard deviation. The
 estimate indicates that the value is only known to within three tenths
-of a unit of measurement. The figures beyond the tenths place, are not
-significant.
+of a unit of measurement. The figures beyond the tenths place are not
+informative to the reader and should be truncated.
 
 Note that I'm glossing over the details here and it is worth reading
-more about [[https://en.wikipedia.org/wiki/Measurement_uncertainty][measurement uncertainty]]. Consider the above a rule of
-thumb.
-
-*** Python code for truncation of means and standard deviations
+more about [[https://en.wikipedia.org/wiki/Measurement_uncertainty][measurement uncertainty]]. 
 
 The following code roughly obeys the above rules. The trick is to use
 a nice feature of the python string formatter that allows the number
@@ -205,28 +172,32 @@ recollection exists, perhaps, of scripts that process one file into
 another but the details and ordering of the procedure have vanished
 from my memory.
 
-In theory, one might /document/ a process. However, this still leaves
-a manual process that may get out of step with the last
+In theory, one might /document/ the process. However, this still leaves
+you with a manual process that may get out of step with the last
 version of the documentation. 
 
 A better approach is to weave the documentation and the code together
-into a master script. [[https://the-turing-way.netlify.app/reproducible-research/make][GNU Make]] provides a simple and effective method
+into a master script. [[https://www.gnu.org/software/make/][GNU Make]] provides a simple and effective method
 for doing this. 
 
 I should note that GNU Make simply does not handle
 having spaces or special characters in filenames---don't even
 try. However, it is usually not such a burden to use hypens or underscores.
 
-GNU Make standardises the master script filename as ~Makefile~.
-
-An excellent tutorial on using Make for replicable research is
+An excellent tutorial on using Make for reproducible research is
 provided by [[https://the-turing-way.netlify.app/reproducible-research/make][Arnold et al.]]
 
 ** Conclusions and next steps
 
-I recently came across The Turing Way by Arnold et al., and I think
-this perfectly exemplifies the approach, applying more generally to
-the research process. 
+Automating your research can seem like cycling up a steep
+hill. Progress appears slow and it's much harder work than
+usual. However, once over the hump, you'll find the going much easier
+and generally much more rewarding. 
+
+In closing, I'd like to point again to documentation provided by [[https://the-turing-way.netlify.app/welcome][The
+Turing Way Community]] as a good general source of information on how to
+make your research more reproducible. You may also want to look at an
+[[https://courses.edx.org/courses/course-v1:HarvardX+PH527x+1T2020/course/][online course on reproducible science]]. 
 
 
 
