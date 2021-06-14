@@ -3,8 +3,8 @@
 #+ORG2BLOG:
 #+DATE: [2020-07-02 Thu 13:34]
 #+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
-#+CATEGORY: 
-#+TAGS: Science, LaTeX
+#+CATEGORY: writing
+#+TAGS: Science, LaTeX, Reproducibility
 #+DESCRIPTION:
 #+TITLE: Making tables reproducible
 
@@ -24,13 +24,15 @@
 Developing reproducible research is a key element in producing robust
 results and good science.
 
-To achieve reproducible research, we must be able to come back to our
-source files in 6 months (or more!) and be able to re-run any
-part of the analysis, reproduce any graph, check the values in the
-tables, and generally ensure that your results were not a fluke. How
-important reproducibility is to you will be discipline dependent but no
-self-respecting researcher should be publishing a paper that has results that cannot even be
-reproduced given access to the original data.
+To achieve research that is reproducible by others, we must /first/ be
+able to reproduce it ourselves. That is, be able to come back to our
+source files in 6 months (or more!) and re-run any part of the
+analysis, reproduce any graph, check the values in the tables, and
+generally ensure that your results were not a fluke. How important
+reproducibility is to you will be discipline dependent but no
+self-respecting researcher should be publishing a paper that has
+results that cannot even be reproduced given access to the original
+data.
 
 One element of reproducibility, that I want to focus on here, is to
 produce tables in such a way that manual error is avoided and that any
