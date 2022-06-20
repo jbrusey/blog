@@ -1,0 +1,93 @@
+#+BLOG: jamesbrusey
+#+POSTID: 432
+#+ORG2BLOG:
+#+DATE: [2022-06-20]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY: writing
+#+TAGS: Science, LaTeX, Diagrams
+#+DESCRIPTION:
+#+TITLE: Drawing diagrams and figures for research articles and theses
+
+Devising an easy to understand, clear, concise diagram for your research article can be a daunting task.
+When your readers first approach your article, the diagrams are likely to be the first thing that they see and may cause them to make a positive or negative assessment of the worth of the paper.
+
+I have put together here some recommendations based on my experiences with reviewing and supervising doctoral students.
+This text is currently in draft form---I still need to add in example images.
+If you have any comments, I'd really like to hear from you!
+   
+* Start with a rough sketch
+A good diagram conveys an idea or a set of ideas in a concise way. For this reason, the first sketch that you do, may not work as a good explanation of the idea. Be prepared to throw away the first version (or so) and for this reason, it is much easier to sketch out by hand before you start. Once you have a workable sketch, you'll find it easier to lay out the text and graphics on the diagram in a neat way using a graphics package.
+
+* Size your canvas appropriately before laying out
+
+If you use a package such as Inkscape, it will, by default, give you an A4 page to draw upon. This leads you to draw a large diagram that covers the whole page, which is then shrunk to, say, 3 or 3.5 cms to scale it to fit into a two column document (suitable for most conferences). However, you will thus end up with tiny text, large amounts of space between boxes, thin and spiderlike lines and arrows, and large amounts of padding within the boxes around any text.
+
+To avoid this problem, start by sizing the diagram to fit to your column width. You should aim to avoid any resizing of the diagram when importing it. If you adjust the canvas size, it is useful to leave a small (say 1mm) space, around the outside of the figure since, even if the graphical elements are positioned only inside the edge of the paper, aliasing effects can cause them to flow slightly outside, and they will look cut off if they are right on the edge.
+
+What will happen if you don't take this advice? You might still be able to use scaling to fit a diagram to your page. However the font sizes won't match up. One trick to get around this is to use a different font than is used in the main body of the text. For example, use Helvetica in the diagram and Times Roman in the body text. This way, the font size mismatch will be less obvious.
+
+Careful use of the scale transform applied to the whole diagram can also be used to adjust an existing diagram to fit in your target space. Make sure you adjust horizontal and vertical proportionally. You may need to rectify font sizes slightly afterwards (they might be 9.1 pt instead of 9 pt, e.g.)
+
+* Use a consistent sizing of fonts and lines
+
+Avoid having some lines thicker than others unless it was your intent to convey extra information this way. In this case, be careful that the reader understands that extra information in the way that you think she does. Try to avoid allowing lines to be too thin or thick (1 pt should generally be considered a minimum).
+
+Avoid small font sizes: some conferences and journals explicitly request nothing smaller than 8pt in graphics.
+
+Avoid overly large font sizes. Scaling of a small diagram can expand text - avoid this by turning off rescaling in LyX or LaTeX and by limiting the maximum font size to around 12 or less.
+
+As a general rule, you should try to match the caption font size (typically 9pt).
+
+* Type consistency
+Aim to have a particular type of graphical element (such as an arrow, box or circle) having a consistent meaning across the whole diagram. For example, avoid using arrows in one place to indicate transfer of control and in another, transfer of information.
+* Try to use standard diagrams
+If you are representing data flows, use a data flow diagram (DFD). If you are representing class hierarchy, use a UML class diagram. If you can't find a diagram style that suits, you may need to make your own but consider borrowing strong elements from existing formats.
+* Be careful with resizing
+If you resize text, it can make a fundamental alteration to the font - squashing horizontally and stretching vertically or vice versa. This text will look slightly wrong (but you probably won't be able to say exactly why it's wrong unless you look closely).
+
+A similar problem occurs with many other things (such as the widths of lines, which will be altered by squeezing or stretching).
+
+The solution is to completely avoid resizing using the stretch tool. Resizing of boxes and lines can be achieved by using the "edit paths" tool. Text should be resized by changing the font size.
+
+If you have existing text that has been stretched or squashed, the simplest fix is to cut and paste the text to a new text box. You'll probably be surprised how much it changes!
+
+* Drawing arrows between shapes
+The way that most computer programs (and most computer scientists) that draw diagrams is not, in my view, aesthetically pleasing. They tend to use the rule: draw from the centre of an edge to the centre of the target edge.
+
+However, I (and many other people) prefer that you draw arrows aligned to a line going through the centroid (or centre of mass).
+
+Furthermore, the eye appreciates curves rather than straight lines; so you could keep with centre edge but curve the line
+
+But actually I think that this works poorly when there are many arrows and it is better to draw a curve centroid to centroid.
+
+To construct this last one, you need to either use clipping (I think Inkscape might support this) or you align your arrow with a curve that is drawn centre to centre that starts out going right and ends going right. The control points need to be done by eye to make a line that you find appropriate.
+
+* Sizing boxes with text
+
+Generally speaking, vertical and horizontal padding between text and the edge of a box surrounding it should be (a) even above and below / left to right and (b) roughly the same between horizontal and vertical.
+
+* Choose a good colour scheme
+
+http://colorbrewer2.org/ provides a nice way to choose a colour scheme that is both pleasant and consistent.
+It also helps with producing diagrams that might also work if they are printed on a black and white printer or are viewed by people who have impaired colour vision.
+
+* Print out and review
+Many small mistakes can be spotted by printing the graphic out in the correct size (i.e., the size that it will eventually be printed at) and examining carefully. There are several things to check for:
++ have boxes or lines become pixellated?
++ is the text readable (too small or large)?
++ is it well balanced
++ are there extraneous artefacts (e.g. small graphical elements that are not supposed to be there)
+* Check for spelling errors
+The print out and review stage is also a good time to make sure that the spelling is correct. Although Inkscape and many other graphical programs will check for errors, they can't spot substitutions such as "through" to "trough" or "perform" to "preform". The only way to be sure is to read through all the text carefully.
+* A check-list for graphics
+The following check-list should be used to ensure your graphics are of good quality:
+1. Is the graphic sized correctly for the target column size (about 3.5 cm for double column, e.g.)?
+2. Are fonts consistent and sized so that they are readable?
+3. Is padding around text minimal (not wasting too much space)?
+4. Is the colour scheme appropriate for the use?
+5. Have you printed out and reviewed on paper?
+6. Spell checked?
+* Additional resources
+
+
+

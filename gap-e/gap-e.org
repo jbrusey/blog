@@ -1,0 +1,44 @@
+#+BLOG: gap-e
+#+POSTID: 61
+#+ORG2BLOG:
+#+DATE: [2022-06-07 Tue 08:14]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY: ethics
+#+TAGS: Ethics, AI
+#+DESCRIPTION: 
+#+TITLE: The gap in our ethical infrastructure and know-how
+#+author: Scott deLahunta
+
+* TLDR
++ Where there are laws, they focus on more obvious, high-profile issues
++ Ethical review processes might help, but are not widely adopted
++ Commonplace systems escape scrutiny
++ Conclusion: there is a clear "gap" in our ethical infrastructure. Ideas for resolving that include moving away from proprietary, closed approaches to intellectual property and towards open approaches (including open / free source) that support ethical review. In addition, embedding ethical review into corporate structures may prove to be sufficient but it is not clear how we will tell. 
+
+** Laws focus on obvious problems    
++ Mastercard recently [[https://www.mastercard.com/news/press/2022/may/with-a-smile-or-a-wave-paying-in-store-just-got-personal/][announced]] that they are thinking about facial recognition at the checkout.
+  + Rather than show your credit card or scan your smartphone, this system would require you simply to look at a camera and then the system would identify you and charge the purchases to your account. 
+  + There is some [[https://theconversation.com/pay-with-a-smile-or-a-wave-why-mastercards-new-face-recognition-payment-system-raises-concerns-183447][debate]] about whether this poses a problem from the point of view of its /accuracy/ or /bias/.
+    + To explain this further, facial recognition /accuracy/ refers to the combined problems of failing to identify someone or misidentifying one person as someone else.
+    + /Bias/ refers to the problem that accuracy varies depending on such things as gender or ethnicity.
+    + Since bias causes systems to behave differently to different groups of users, it raises legitimate ethical concerns about the long term effect on those groups. 
+  + Recent [[https://artificialintelligenceact.eu/][EU AI Act]] will need to be considered as this probably falls into the category of `high risk' AI
+  + Risk arises because past AI systems, such as those used to screen CVs, have been found to replicate bias that was in the original data; the basis of screening decisions wasn't transparent and favoured white males over other categories.
+  + However, risk assessment is subtle and should not be left to the imagination of regulators.
+
+** Ethical review is rare  
++ On a recent trip to Pakistan to teach a course to research managers, a striking fact emerged: ethical review processes were only observed rigorously for medical sciences.
++ Indeed, the research managers seemed to accept this as a norm simply because the existing review processes were so bureaucratic and time consuming. 
++ If we were to survey tech industries in the UK, in all likelihood, we would find the same result. 
+  
+** Commonplace systems escape scrutiny  
++ When elevators were first developed, people didn't trust them 
++ Elevators - seemingly straightforward but need to be as energy and time efficient as possible
+  + Problem is one of being able to predict where demand will be taking into account some obvious factors:
+    + time of day
+    + what has happened in recent past
+    + current state of a set of elevators
+  + Modelling humans involved is also an important factor (e.g., walking speeds, group behaviour, etc)
++ Exactly how such systems work and what data they obtain and store is kept secret by the manufacturer    
++ The decision making of elevators and many other everyday systems continues to evolve and develop without transparency, oversight, or much consideration.
++ While elevators are the safest known form of transport, ethical risks do arise for commonplace systems
