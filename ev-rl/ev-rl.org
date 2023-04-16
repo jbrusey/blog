@@ -4,36 +4,49 @@
 #+DATE: <2021-05-10 Mon>
 #+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
 #+CATEGORY: rl
-#+TAGS: Electric vehicles, Reinforcement Learning
+#+TAGS: Electric vehicles, Reinforcement Learning, Thermal comfort
 #+DESCRIPTION: 
-#+TITLE: Range anxiety relief for electric vehicles
+#+TITLE: Keeping your cool while saving the planet
+# A piece on cooling homes and cars – the technology, testing, energy use reduction, etc – could be really interesting.
+# Elena - what is your article idea?
 * tl;dr
 ** The problem
-   + Range anxiety forms a roadblock against widespread adoption of EVs [[https://www.sciencedirect.com/science/article/pii/S0301421512005162]]
-   + Radical changes in battery performance seem unlikely given relatively slow rate of progress so far [[https://www.researchgate.net/publication/255748960_Thermodynamic_analysis_on_energy_densities_of_batteries]] although batteries are getting cheaper https://theconversation.com/battery-costs-drop-even-faster-as-electric-car-sales-continue-to-rise-39780
-   + Fuel cells (e.g., storing hydrogen under pressure and converting to electricity) are an option but have their own problems https://www.zdnet.com/article/the-problem-with-fuel-cells/ https://futureofworking.com/10-advantages-and-disadvantages-of-hydrogen-fuel-cells/
-   + Many journeys are quite short but occasionally long journeys must be undertaken https://www.sciencedirect.com/science/article/pii/S0968090X1100012X
-   + Availability of charging points in UK is behind many other countries [[https://www.edie.net/news/8/UK--lags-behind--mainland-Europe-on-EV-infrastructure/]]
-   + On the one hand, we must address excess energy consumption, such as the climate control system:
-     + Natural ventilation is poorly used by current approaches
-     + Heating systems within the car are dealt with on a component level and not fully integrated
-     + Modern human thermal comfort models aren't taken into account
-   + On the other hand, better and more accurate range information systems are needed
-     + Current approaches do not adequately incorporate contextual information and can be overly optimistic on long drives
++ Energy consumption from heating and cooling buildings and vehicles forms a large part of UK's CO2 footprint.
++ For electric vehicles, the energy cost of air conditioning significantly reduces their drive range. 
++ However, there is an adverse side to not being thermally comfortable---it reduces mental acuity and may even be dangerous in some cases.
++ While some energy consumption is necessary, it is becoming clear that there is considerable energy waste in this (which?) sector.
++ Traditional models for human thermal comfort allowed AC manufacturers to argue for tightly controlling temperatures to around 21 deg C.
++ Modern human thermal comfort models, however, say that neutral temperatures (not too hot or cold) vary depending on recent experience, which is why office workers in Delhi are ok with just a few ceiling fans.
 ** The vision
-   + The design of EV thermal systems can be optimised to better make use of:
-     + available opportunities (such as, including more natural ventilation when the cabin is hot and the ambient air is cool);
-     + integrated control of hot air and radiant surfaces to achieve comfort with minimal effort;
-     + advanced technologies (insulation, targeted vents, radiant panels, heat pumps) to reduce the energy cost of comfort.
-   + More accurate EV drive range prediction via better contextual information, including:
-     + Acceleration profile
-     + Speed
-     + Hilly versus flat terrain
-     + Time of day
-     + Weather
+  + The design of vehicle thermal systems can be optimised to better make use of:
+    + available opportunities (such as, including more natural ventilation when the cabin is hot and the ambient air is cool);
+    + integrated control of hot air and radiant surfaces to achieve comfort with minimal effort;
+    + advanced technologies (insulation, smart vents, radiant panels, heat pumps) to reduce the energy cost of comfort.
 ** The outcomes
-+ At the small scale, reducing the energy cost of providing comfort in EVs will help reduce range anxiety and contribute to uptake of EVs.
-+ On a larger scale, each percentage point improvement in the energy efficiency of EV comfort systems will help towards reducing the our overall energy footprint. 
++ At the small scale, reducing the energy cost of providing comfort in cars will help reduce range anxiety for electric vehicle users and reduce fuel costs for traditional vehicles.
++ On a larger scale, each percentage point improvement in the energy efficiency of comfort systems will help towards reducing our overall energy footprint. 
+
+* How vehicle climate systems are developed
++ Before a car is released onto the market, careful testing of the vehicle and its climate control system in a Climatic Wind Tunnel (CWT) ensures that it operates correctly.
++ Such trials are expensive and usually limited to a few specific tests, such as warming up from -10C and cooling down from 37C.
++ Increasingly, virtual, computer-based models of the car and its climate system are used to try out novel ideas for improvement of the system.
++ Nonetheless, each innovation takes years from inception to reaching a production vehicle. 
+
++ Thermal comfort models may have formed the inspiration for modern car climate control systems.
++ However, only air temperature is measured in the car and only measured at a distance from the driver and passengers.
++ There are two problems here: air temperature is not the whole story, e.g., radiant heat is important---that's why we tend to feel cold in a poorly insulated house in winter even if the air temperature is 21C while 21C seems too hot in a car that's been sitting in the sun. Also, recent temperature history plays a part---a hot day in Melbourne is 37C while 27C is considered a heat wave in London. 
++ Second, the temperature measured in the instrument panel may not be a good indication of the temperature near the driver or passengers.
++ So climate systems tend to be hand-tuned by expert engineers to try to offset these problems, which is expensive, time-consuming, and not necessarily leading to best performance.
+
+* How we understand thermal comfort
+
++ In the 1930s, Gagge performed some of the earliest experiments trying to understand thermal physiology by placing subjects nude in a copper booth for several hours under varying temperature conditions and assessing their weight loss. 
++ Then, in the '60s, Fanger argued for a model that could give AC engineers a target temperature and his Predicted Mean Vote (PMV) model became the dominant paradigm despite being hard to calculate (it took 2 hours on computers of the time).
++ His model dominated the field for many years and is encoded into various standards but in the '70s, Nicol and Humphries noticed that office workers in India were comfortable in much hotter temperatures than PMV suggested would be ok.
++ Their concerns only started to be heard by the late '90s with more and more experiments showing little correlation between reported comfort perception and PMV's prediction.
++ A key innovation here was to bring the experiments out of the lab and into offices and homes. Instead of looking at a sample of 100 or so subjects, many separate experiments involving 1000s of subjects were aggregated (Brager and de Dear). 
++ Nicol and Humphries new Adaptive Comfort model is much simpler---essentially a straight line fit between comfort perception (too cold to too hot) and temperature with an adjustment for recent temperature history.
++ This newer work inspired the approach of /natural ventilation/ where vents control airflow through the building to maintain the temperature. e.g., Lanchester Library.
 
 * Optimising the climate system
 ** Better human thermal comfort models
@@ -54,18 +67,11 @@
    + Furthermore, the control system can change how it behaves when the windows are open.
    + Automated natural ventilation doesn't just have to be through windows - vents can receive air from outside too without needing to take that air through the complicated cooling and heating cycle normally performed.
 
-* Range prediction tools and driver information
-+ Tools for predicting the remaining range of the vehicle are already commonplace.
-+ However, such tools are inaccurate and in some key situations, such as longer drives, catastrophically optimistic.
-+ Such optimism derives from a simple view on the range calculation: recent driving performance (miles per kWh) is used as the main and perhaps only factor.
-+ However, recent drives are likely to be shorter, around-town, drives that are at lower speeds and thus more energy efficient.
-+ Motorway driving, on the other hand, where the range calculation becomes crucial, may yield quite different range performance due to wind resistance becoming the dominating factor.
+
 
 * What it takes to get there
 
-  + For the problem of estimating range, the domain of Reinforcement Learning suggests a neat solution: just as the core part of Alpha-Zero can accurately guess the winner of a game of chess from the current position, the same approach can be used to estimate the remaining drive range depending on the best available contextual information.
   + At the same time, RL may also be able to help with developing an optimised climate system that keeps you comfortable and the windshield defogged at the least energy cost.
-  + The key to both of these solutions lies not in clever algorithms but rather in gathering experience.
 
 ** Real world experience leading to fast simulation
 + How does the air temperature in the car change when you run the heater at power A, the compressor at speed B, the recirculation flap set to position C, and the air vent distribution set to D? Clearly, this doesn't just depend on these settings but also: the current cabin air temperature(s), the external air temperature, the humidity inside and out, the incident solar radiation, the heat stored in the chassis of the car, and so forth. 
