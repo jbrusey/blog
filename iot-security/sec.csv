@@ -1,0 +1,8 @@
+"IoT Security Weak Points","Explanation"
+"Insecure default settings","Many IoT devices come with default passwords and settings that users often don't change, leaving them vulnerable to unauthorized access."
+"Insufficient encryption and data protection","IoT devices may lack proper encryption for data transmission and storage, exposing sensitive data to potential interception."
+"Lack of regular security updates and patches","Manufacturers may not provide timely security updates and patches for their devices, leaving them exposed to known vulnerabilities."
+"Inadequate authentication methods","Weak authentication methods or lack of multi-factor authentication can make it easier for attackers to gain access to IoT devices."
+"Insecure network configurations","IoT devices may be connected to networks without proper segmentation or firewall protection, increasing the risk of unauthorized access to other critical systems."
+"Absence of built-in security features","IoT devices may not be designed with security-by-design principles, lacking hardware or software security features that could protect them from attacks."
+"Poor supply chain security","IoT devices may contain third-party components that do not meet necessary security requirements, introducing vulnerabilities into the final product."
