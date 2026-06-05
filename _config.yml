@@ -1,0 +1,23 @@
+title: James Brusey
+description: Migrated org2blog archive
+url: ""
+baseurl: ""
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+permalink: /:year/:month/:day/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+exclude:
+  - scripts
+  - org-src
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - MIGRATION_REPORT.md
