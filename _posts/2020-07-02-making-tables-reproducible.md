@@ -1,0 +1,115 @@
+---
+layout: post
+title: "Making tables reproducible"
+date: 2020-07-02 13:34:00 +0000
+categories: ["writing"]
+tags: ["Science", "LaTeX", "Reproducibility"]
+permalink: "/2020/07/02/making-tables-reproducible/"
+wordpress_id: "282"
+---
+
+# Key ideas
+
+- DON'T manually transfer table values to LaTeX – DO put the data in a separate file that gets loaded during compilation.
+- DON'T format your values and truncate decimal places manually – DO use a script to truncate values consistently.
+- DON'T manually insert units or convert exponents – DO use `siunitx` to format numbers and units.
+- DON'T end up with a jumble of scripts – DO tie your workflow together with a Makefile
+
+# Introduction
+
+Developing reproducible research is a key element in producing robust results and good science.
+
+To achieve research that is reproducible by others, we must *first* be able to reproduce it ourselves. That is, be able to come back to our source files in 6 months (or more!) and re-run any part of the analysis, reproduce any graph, check the values in the tables, and generally ensure that your results were not a fluke. How important reproducibility is to you will be discipline dependent but no self-respecting researcher should be publishing a paper that has results that cannot even be reproduced given access to the original data.
+
+One element of reproducibility, that I want to focus on here, is to produce tables in such a way that manual error is avoided and that any value in the table can be recalculated.
+
+Manual handling of numbers is a common source of error but it needn't be. Once scripts are set up to automatically generate tables from the source data, they are easily modified to suit the next table, the next paper, or the next project. If you are not using a tool that supports you producing your tables directly, then this will be the biggest hurdle. However, without this step, it will be hard, not just to automate your tables, but to make your work completely reproducible.
+
+Your tools will dictate, to some extent, how easy automation is to do. Try to avoid tools that encourage manual handling, such as Excel and Word, and switch instead to tools that make automation easier, like R and Python. I also recommend that you make use of GNU Make to tie everything together and make it easy to remember what to do when you come back in 6 months time.
+
+# Background
+
+I don't want to provide a detailed literature review here but I do want to make a note of some important trends in science.
+
+1.  [The Open science movement](https://en.wikipedia.org/wiki/Open_science) is leading the way towards more transparent scientific practices. Scientists are starting to realise that the intellectual honesty that goes with open source software should also apply to their outputs. This means more than just making the output (or journal paper) freely available – it means making the \`source code' of that output available, including the original data used and analysis scripts.
+2.  A systematic study of biomedical research in 2005 by Ioannidis found that [most published research findings are false](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124&xid=17259,15700019,15700186,15700190,15700248). It seems likely that the problems identified for biomedicine are *worse*, not better, for other disciplines.
+3.  A 2016 survey of 1500 scientists asked if there was a [reproducibility crisis](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970)? More than half said \`yes', with another third saying that there was a slight crisis. Scientists reported trouble reproducing others and many said they even had trouble reproducing their own experiments, when they attempted to do so.
+
+The key message is that reproducibility is of fundamental importance and that we all need to work harder at enabling it for our own research.
+
+# Automating the process starting with table loading
+
+![](/assets/images/rep-tables/img/example-table.png)
+
+Most researchers will manually transcribe this data into a LaTeX (or Word) document, like so:
+
+``` latex
+\begin{tabular}{...}
+Policy & Avg. Reward & Comfort score & Energy use (Wh)\\
+bang-bang-et & $-2.82$ & $-0.72$ & $1950$ \\
+bang-bang-avg & $-2.27$ & $-0.87$ & $721$ \\
+...
+```
+
+Note how a few things needed to be manually transformed in this process.
+
+- Numbers need to be written in math-mode (using `$` signs) to give a consistent font and to ensure that the minus signs look right.
+- Some rows or columns may not be relevant (the 1.48E+12 is actually to do with the Unix clock time when the result was generated).
+- The numbers need to be truncated or rounded appropriately. It's a good question to ask "what's appropriate?" here. If you have standard deviation or confidence intervals then round appropriately for that. Leaving in a large number of digits suggests that you don't understand the uncertainty in your data.
+- Exponents need to be translated into a printable form. Note that the `siunitx` package has a nice facility for doing this automatically.
+
+With so many little details to be taken care of, automating looks hard. Fortunately, there are some cool tools to help.
+
+If the job is a simple one (or can be made simple), try using [csvsimple](https://www.ctan.org/pkg/csvsimple) to load in table. I won't describe this here but there's lots of help on the Internet.
+
+The `csvsimple` package allows you to put extra commands, such as `\si{}` (from `siunitx`), around each table entry but for specialist needs (such as, truncating numbers) you may need to write your own script that writes a \`tex' file. This tex file will then need to be included into your main file with `\input`.
+
+## Truncating numbers appropriately
+
+Quoting table values to 10 decimal places is clearly not appropriate. Most experiments, if tried again, will yield slightly different values. We should aim to express numbers in a way that appropriately reflects our uncertainty about the true value.
+
+For example, imagine that we have an experiment that involves 10 trials and we record the mean measurement value from those trials. The standard deviation provides useful information about the likely precision of the mean. Confidence intervals can often be derived from the standard deviation given the sample size and assuming a normal distribution.
+
+As a rule of thumb, the standard deviation should be expressed to **one** [significant figure](https://en.wikipedia.org/wiki/Significant_figures) unless the number is between 11 and 19 (times some power of ten) in which case you can use two significant figures.
+
+The measurement value should be expressed to agree in terms of decimal places with the standard deviation.
+
+For example, a value resulting from a spreadsheet calculation of an average and standard deviation might be 10.1298 ± 0.2595. This should be expressed as 10.1 ± 0.3 or 10.1 (0.3) where the number in parenthesis is taken to be the estimated standard deviation. The estimate indicates that the value is only known to within three tenths of a unit of measurement. The figures beyond the tenths place are not informative to the reader and should be truncated.
+
+Note that I'm glossing over the details here and it is worth reading more about [measurement uncertainty](https://en.wikipedia.org/wiki/Measurement_uncertainty).
+
+The following code roughly obeys the above rules. The trick is to use a nice feature of the python string formatter that allows the number of digits after the decimal point to be parameterised.
+
+``` python
+def mean_string(m, s):
+    return '{:6.{sig}f} ± {:.1g}'.format(m, s, sig=-int(np.floor(np.log10(s))))
+```
+
+    >>> mean_string(0.016933, 0.005105)
+    ' 0.017 ± 0.005'
+
+The way this works is to work out the base 10 log of the s.d. This number will typically be negative (I haven't dealt with s.d. \> 1!). Taking the floor of this number will tell you how many digits after the decimal point need to be included to format the mean.
+
+For this simple code, the s.d. is simply formatted with 1 significant figure. This might be improved by first finding out if the first two digits of the s.d. are between 11 and 19 inclusive and in that case formatting with 2 significant digits.
+
+# Makefiles to tie together and document
+
+I always find that when I come back to a project after leaving it for a few weeks that I cannot remember what I've done. Some vague recollection exists, perhaps, of scripts that process one file into another but the details and ordering of the procedure have vanished from my memory.
+
+In theory, one might *document* the process. However, this still leaves you with a manual process that may get out of step with the last version of the documentation.
+
+A better approach is to weave the documentation and the code together into a master script. [GNU Make](https://www.gnu.org/software/make/) provides a simple and effective method for doing this.
+
+I should note that GNU Make simply does not handle having spaces or special characters in filenames—don't even try. However, it is usually not such a burden to use hypens or underscores.
+
+An excellent tutorial on using Make for reproducible research is provided by [Arnold et al.](https://the-turing-way.netlify.app/reproducible-research/make)
+
+# Conclusions and next steps
+
+Automating your research can seem like cycling up a steep hill. Progress appears slow and it's much harder work than usual. However, once over the hump, you'll find the going much easier and generally much more rewarding.
+
+In closing, I'd like to point again to documentation provided by [The Turing Way Community](https://the-turing-way.netlify.app/welcome) as a good general source of information on how to make your research more reproducible. You may also want to look at an [online course on reproducible science](https://courses.edx.org/courses/course-v1:HarvardX+PH527x+1T2020/course/).
+
+# Acknowledgements
+
+This blog post was produced using Emacs, org-mode, and org2blog.

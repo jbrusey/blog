@@ -1,0 +1,108 @@
+---
+layout: post
+title: "Keeping your cool while saving the planet"
+date: 2021-05-10 00:00:00 +0000
+categories: ["rl"]
+tags: ["Electric vehicles", "Reinforcement Learning", "Thermal comfort"]
+permalink: "/2021/05/10/keeping-your-cool-while-saving-the-planet/"
+---
+
+# tl;dr
+
+## The problem
+
+- Energy consumption from heating and cooling buildings and vehicles forms a large part of UK's CO2 footprint.
+- For electric vehicles, the energy cost of air conditioning significantly reduces their drive range.
+- However, there is an adverse side to not being thermally comfortable—it reduces mental acuity and may even be dangerous in some cases.
+- While some energy consumption is necessary, it is becoming clear that there is considerable energy waste in this (which?) sector.
+- Traditional models for human thermal comfort allowed AC manufacturers to argue for tightly controlling temperatures to around 21 deg C.
+- Modern human thermal comfort models, however, say that neutral temperatures (not too hot or cold) vary depending on recent experience, which is why office workers in Delhi are ok with just a few ceiling fans.
+
+## The vision
+
+- The design of vehicle thermal systems can be optimised to better make use of:
+  - available opportunities (such as, including more natural ventilation when the cabin is hot and the ambient air is cool);
+  - integrated control of hot air and radiant surfaces to achieve comfort with minimal effort;
+  - advanced technologies (insulation, smart vents, radiant panels, heat pumps) to reduce the energy cost of comfort.
+
+## The outcomes
+
+- At the small scale, reducing the energy cost of providing comfort in cars will help reduce range anxiety for electric vehicle users and reduce fuel costs for traditional vehicles.
+- On a larger scale, each percentage point improvement in the energy efficiency of comfort systems will help towards reducing our overall energy footprint.
+
+# How vehicle climate systems are developed
+
+- Before a car is released onto the market, careful testing of the vehicle and its climate control system in a Climatic Wind Tunnel (CWT) ensures that it operates correctly.
+
+- Such trials are expensive and usually limited to a few specific tests, such as warming up from -10C and cooling down from 37C.
+
+- Increasingly, virtual, computer-based models of the car and its climate system are used to try out novel ideas for improvement of the system.
+
+- Nonetheless, each innovation takes years from inception to reaching a production vehicle.
+
+- Thermal comfort models may have formed the inspiration for modern car climate control systems.
+
+- However, only air temperature is measured in the car and only measured at a distance from the driver and passengers.
+
+- There are two problems here: air temperature is not the whole story, e.g., radiant heat is important—that's why we tend to feel cold in a poorly insulated house in winter even if the air temperature is 21C while 21C seems too hot in a car that's been sitting in the sun. Also, recent temperature history plays a part—a hot day in Melbourne is 37C while 27C is considered a heat wave in London.
+
+- Second, the temperature measured in the instrument panel may not be a good indication of the temperature near the driver or passengers.
+
+- So climate systems tend to be hand-tuned by expert engineers to try to offset these problems, which is expensive, time-consuming, and not necessarily leading to best performance.
+
+# How we understand thermal comfort
+
+- In the 1930s, Gagge performed some of the earliest experiments trying to understand thermal physiology by placing subjects nude in a copper booth for several hours under varying temperature conditions and assessing their weight loss.
+- Then, in the '60s, Fanger argued for a model that could give AC engineers a target temperature and his Predicted Mean Vote (PMV) model became the dominant paradigm despite being hard to calculate (it took 2 hours on computers of the time).
+- His model dominated the field for many years and is encoded into various standards but in the '70s, Nicol and Humphries noticed that office workers in India were comfortable in much hotter temperatures than PMV suggested would be ok.
+- Their concerns only started to be heard by the late '90s with more and more experiments showing little correlation between reported comfort perception and PMV's prediction.
+- A key innovation here was to bring the experiments out of the lab and into offices and homes. Instead of looking at a sample of 100 or so subjects, many separate experiments involving 1000s of subjects were aggregated (Brager and de Dear).
+- Nicol and Humphries new Adaptive Comfort model is much simpler—essentially a straight line fit between comfort perception (too cold to too hot) and temperature with an adjustment for recent temperature history.
+- This newer work inspired the approach of *natural ventilation* where vents control airflow through the building to maintain the temperature. e.g., Lanchester Library.
+
+# Optimising the climate system
+
+## Better human thermal comfort models
+
+- The study of human thermal comfort has evolved considerably since early models were proposed by Fanger in the 1970s.
+- Such traditional models focus on minimising the percent of the population that would be dissatisfied by a particular set of environmental conditions, mainly based on temperature but also including factors such as clothing, radiant heat, humidity and so forth.
+- Air conditioning systems in buildings and vehicles traditionally aimed to bring the temperature to a target value, such as 21 deg. C.
+- However, it has since been realised that humans tend to adapt to their surroundings and will be comfortable in much hotter temperatures when living in a hot climate, for example.
+- Since around 1998, adaptive models of thermal comfort that incorporate recent environmental experience have gained popularity.
+- These new models paved the way to reducing the energy cost of air conditioning buildings and could potentially do the same for vehicle climate systems.
+
+## Example: natural ventilation
+
+- One way to improve the energy performance of buildings is to make better use of natural ventilation.
+- Rather than strictly conditioning temperatures to 21C, a naturally ventilated building promotes airflow through a building to encourage heat loss. Ventilation systems only close when the outside temperature becomes too high (or too cold).
+- An immediate objection to making use of natural ventilation in cars is that car users don't want their window opened automatically.
+  - However, encouraging users to wind down windows when beneficial (e.g., hot inside but cool outside) will in most cases be sufficient.
+  - Furthermore, the control system can change how it behaves when the windows are open.
+  - Automated natural ventilation doesn't just have to be through windows - vents can receive air from outside too without needing to take that air through the complicated cooling and heating cycle normally performed.
+
+# What it takes to get there
+
+- At the same time, RL may also be able to help with developing an optimised climate system that keeps you comfortable and the windshield defogged at the least energy cost.
+
+## Real world experience leading to fast simulation
+
+- How does the air temperature in the car change when you run the heater at power A, the compressor at speed B, the recirculation flap set to position C, and the air vent distribution set to D? Clearly, this doesn't just depend on these settings but also: the current cabin air temperature(s), the external air temperature, the humidity inside and out, the incident solar radiation, the heat stored in the chassis of the car, and so forth.
+- One approach to this problem is to model the physics of the situation, which has the advantage that the resulting model can be interpreted and that a change to the physical environment can be incorporated by a small change to the model.
+- However, such models are difficult to build correctly and complex to compute once built meaning that any simulation may be about as slow as real-time.
+- Furthermore, it is difficult to accurately simulate detail within the cabin (such as, the temperature at the driver's head versus at their foot) without resorting to computational fluid dynamics (CFD), which then is much slower to compute.
+- Experience data is often gathered in Climatic Wind Tunnels (CWTs). The advantage of using a CWT is that the experiment can be readily reproduced. The disadvantage is that the experience gathered this way is not necessarily realistic.
+  - The lack of realism is emphasised by the Dieselgate scandal where \`cheat' mechanisms used by vendors made the laboratory emissions tests appear to show low levels of emissions whereas the actual emissions when tested on the road were much higher.
+- Vehicle manufacturers could potentially gather in-use experience with agreement from end-users and thus build a richer experience set.
+
+## Build fast simulation from experience or learn directly?
+
+- It is an open question how best to make use of experience data for Reinforcement Learning but two obvious options are available.
+  - The first is to learn a simulator from experience. Simulators learnt this way are likely to be much faster in execution that traditional, physics based approaches.
+  - The second option is to use RL directly from experience. The main difficulty with this (explored by the Dagger algorithm) is a mismatch in probability distributions between the policy used during experience occurring and the policy that you are trying to learn.
+- When using the first approach, it is necessary to protect against the RL policy learning to exploit inadequacies in the simulator. For example, the policy might drive the state to part of the state space that was not experienced and for which the simulator responds poorly.
+
+## What it really takes is courage
+
+- Even within the confines of a research project, engineers are reluctant to use machine learning to control a real system, even one so constrained and low-risk as the climate system or the range estimator.
+- The car industry is quite conservative—it takes a long time for radical ideas to be adopted.
+- On the other hand, *sometimes* we are brave.
