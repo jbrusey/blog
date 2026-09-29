@@ -1,124 +1,87 @@
 ---
 layout: post
-title: "How to do sustainable AI adoption"
+title: "Building sustainable AI adoption"
 date: 2026-09-25 19:37:00 +0000
 permalink: "/2026/09/25/sustainable-ai-adoption/"
 ---
+Sustainable AI adoption depends on people who can understand, evaluate, own and maintain a useful system.
 
-### Adoption is not the same as experimentation
+Coventry University’s AI Adoption Lab helps teams solve live organisational problems.
+We define the problem with them, test AI against their current approach and build the skills they need to continue after our involvement ends.
 
-What does *AI adoption* mean to you?
+Our Early Student Support project applies this method with Coventry’s Student Experience team.
+We want to learn whether institutional data can help colleagues identify students who may need support.
+Earlier identification could give staff more time to act before a student’s problems grow.
 
-For many organisations, it can amount to paying an AI supplier a licence fee and hoping that this somehow changes work practice.
-It is relatively easy to show that AI can do something useful.
-A much harder problem is to turn that demonstration into a capability that produces lasting benefit.
+Education is Coventry’s core business.
+Timely support can improve a student’s experience and reduce pressure on staff.
+Through this project, we can test our adoption method in an area that affects students, their families and the University.
 
-In other words, it is not simply a question of whether AI can do a particular thing.
-Does it work reliably, does it create measurable value, and can the organisation sustain it?
+### Give the operational team ownership
 
-Our AI Adoption Lab at Coventry University is built on the idea that sustainability comes first.
+Operational colleagues must help design the system and make decisions from the outset.
+They know the process, its constraints and the demands that implementation will place on staff.
+They will also maintain and develop the system when support from the Lab ends.
 
-One example is our Student Experience project.
-The Student Experience team wanted to identify students who might need support before they fail or drop out.
-They had experimented with a variety of solutions, but could not readily maintain or develop these themselves.
+Lab researchers bring AI expertise.
+Student Experience colleagues bring knowledge of student support and the institution.
+Together, they can judge whether a proposed system will work in practice.
 
-In this article, we reflect on that project and the principles we have developed for sustainable adoption of AI.
+Coventry also uses these projects to grow its own AI talent.
+A recent PhD graduate is developing the models for Early Student Support, working alongside Student Experience colleagues as part of the team.
+This gives the researcher a route into live institutional work, and gives the University a way to retain AI capability rather than lose it once a project ends.
 
-### Start with the people who will own it
+The Lab should leave the team with the skills and confidence to continue without us.
 
-As an AI expert, it is relatively easy to provide a solution that works.
-But is it the right solution?
-Is it meeting the needs of the people who will actually use it?
+### Define success at the start
 
-This sounds obvious, but technically adept professionals can become so absorbed in the cleverness of a solution that they forget to ask whether it genuinely meets the needs of the people involved.
+Teams can produce convincing AI demonstrations in a short time.
+Adoption requires evidence that a system improves the work.
 
-The first principle, therefore, is to give the operational team ownership.
-This means involving them in design decisions from the outset, embedding technical expertise with them, and deliberately transferring capability.
+At the start of each project, the Lab and the operational team document the current process, choose the outcome they want to improve and set a threshold that would justify adoption.
 
-Ultimately, the Adoption Lab's aim is to no longer be needed.
-Adoption succeeds when the operational team takes complete ownership of the solution.
+For Early Student Support, we will compare our system with the current approach.
+We need to identify students in time for staff to help without creating a volume of alerts that staff cannot handle.
+Strong technical scores have little value if the system adds work or sends alerts after the chance to help has passed.
 
-For the Student Experience project, the Adoption Lab brought in a recent PhD graduate to help with development.
-We embedded that person directly in the team so that knowledge and skills could be transferred through the work itself.
+The team will use these results to decide whether to adopt the system.
 
-### Decide how you will know whether it works
+### Limit the first question
 
-The second principle is to agree at the outset how success will be measured.
+After a successful experiment, teams often see other uses for the technology.
+Each new use adds work and delays evaluation.
 
-A common example is using a Large Language Model to check documents against rules or regulations.
-Producing a plausible answer is not enough: performance needs to be tested against a benchmark set of known cases.
-That benchmark should remain part of the system so that changes to the model or prompt can be checked over time.
+We have limited the first phase of Early Student Support to one question: can the available data help staff identify students who may need support before the current process does?
 
-Where several metrics matter, the important thing is to agree the trade-offs between them in advance.
-Otherwise, one measure may improve while another gets worse, leaving people arguing after the event about whether the system is actually better.
+We will defer work on causes, intervention choices, automated contact, process redesign and extra data sources.
+Those tasks require separate questions and measures.
 
-You should also establish a baseline.
-Where are you now in terms of performance?
-Without this, it becomes difficult later to show whether the AI has genuinely improved anything.
+With this boundary, the team can finish the test, evaluate the result and use the evidence to choose the next step.
 
-For the Student Experience project, our metric is how well we can predict "did not pass" at weeks 2 and 4.
-We use an F2 score, deliberately giving greater weight to finding students who may need support than to avoiding unnecessary alerts.
+### Keep the project moving
 
-That choice matters.
-A solution might be technically better but still be useless if it produces alerts too late, overwhelms staff, or directs attention towards the wrong cases.
-The metric has to reflect the real requirement.
+Staff must balance adoption work with daily demands.
+Without regular sessions and deadlines, they can lose focus and ownership.
 
-### Constrain the problem
+We use a three-month plan for Early Student Support, with scheduled working sessions and review points.
+During those sessions, the team makes decisions, addresses problems and checks progress against the agreed measures.
 
-AI projects can easily become open-ended programmes.
-Once a project shows promise, more requirements, datasets, users and possible applications tend to be added.
-The finish line keeps moving.
+The Lab brings AI expertise, but it also imposes a cadence for adoption: a rhythm that carries the project through to a decision.
 
-The third principle is therefore to constrain the scope of the project at the outset.
+### Use AI to speed up experiments
 
-For the Student Experience project, we constrain the initial problem to predicting student outcomes better than the existing approach.
-We deliberately leave questions such as "would contacting this particular student actually improve their outcome?" outside the scope.
+After the team defines the question and the measure of success, our researchers can use AI agents to automate parts of the experiment.
+Agents can compare models and configurations in less time than a data scientist would need to run each test by hand.
 
-That is a different and much harder problem.
-Predicting risk is not the same as knowing which intervention will change an individual's outcome.
+We use this approach in Early Student Support.
+The team still decides which problem deserves attention and whether the results improve student support.
 
-Constraining the scope helps ensure that the work fits the time and resources available.
+### Leave the team ready for the next problem
+
+The Adoption Lab creates ownership, defines success, limits scope and keeps the work moving.
+These practices give a small project a better chance of reaching use.
+
+At the end of a project, the operational team should have a useful system, evidence of its value and the skills to develop it.
+We will know we have succeeded when teams can tackle their next problem without us.
 
 *A small AI project that reaches use is more valuable than an ambitious AI programme that remains permanently at 80% completion.*
-
-### Put time boundaries around the work
-
-Time boundaries may sound similar to scope control, but the problem here is momentum.
-
-People begin enthusiastically, but their day jobs intervene.
-After several months without a meeting, no clear timeline and no visible progress, it is reasonable for people to wonder whether they are even still doing an AI project.
-
-The fourth principle is therefore to set time boundaries and agree a rhythm for the work.
-
-For the Student Experience project, we formulated a three-month plan with milestones that act as checkpoints.
-We also set up weekly informal working sessions alongside less frequent sprint reviews.
-
-This keeps us clear about whether we are on track and what needs to happen next.
-
-The Adoption Lab should not only bring AI expertise.
-It also needs to impose a *cadence for adoption*.
-
-### AI can now accelerate the technical work
-
-AI itself can increasingly be used to accelerate the technical work involved in AI projects.
-
-We are adapting an approach recently popularised by Andrej Karpathy's *autoresearch*: give an AI agent a bounded experimental problem and an objective measure of whether each change improves the result.
-
-For this to work, the problem and the metric both have to be clear.
-The agent needs to know when one solution is better than another.
-
-In the Student Experience project, we are already using this approach to compare many different models and configurations.
-
-The obvious consequence is speed.
-The more important consequence is that it forces us to be precise about the problem we are trying to solve and how we will evaluate success.
-
-### Sustainable adoption means leaving capability behind
-
-The ultimate measure of success for the Adoption Lab is not how many AI systems we build, but how many teams no longer need us.
-
-We now have more than a dozen projects in progress, several of which are already showing positive benefits, including the Student Experience project.
-
-But the real test is not the number of projects or prototypes.
-It is whether the teams involved are left with working solutions, the ability to evaluate and improve them, and the confidence and capability to continue after the Adoption Lab steps away.
-
-That, ultimately, is what makes AI adoption sustainable.
